@@ -1,0 +1,11 @@
+node_modules/
+dist/
+*.tsbuildinfo
+*.log
+.DS_Store
+
+src-tauri/target/
+src-tauri/.cargo/
+
+assignment-tracker-windows-source.zip
+
