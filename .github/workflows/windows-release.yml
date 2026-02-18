@@ -2,6 +2,8 @@ name: Windows Build and Release
 
 on:
   push:
+    branches:
+      - main
     tags:
       - "v*"
   workflow_dispatch:
@@ -43,7 +45,7 @@ jobs:
           args: --bundles msi,nsis
 
   build-windows-artifacts:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -67,7 +69,7 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: assignment-tracker-windows
+          name: assignment-tracker-windows-${{ github.run_number }}
           path: |
             src-tauri/target/release/bundle/msi/**
             src-tauri/target/release/bundle/nsis/**
